@@ -1,0 +1,2 @@
+# erange-info-organization-RTSP_Conversion_for_ONVIF
+NVRがRTSP未対応の為、型落ちラズパイにCentOSを入れffmpegでコンバートしてnginxでストリーミング
