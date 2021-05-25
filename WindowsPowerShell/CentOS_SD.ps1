@@ -1,4 +1,4 @@
-﻿# パラメータとして、ファイルを保存するパス、ダウンロードファイル・リストのファイル名を宣言
+# パラメータとして、ファイルを保存するパス、ダウンロードファイル・リストのファイル名を宣言
 Param([String]$path='%USERPROFILE%\AppData\Local\Temp\RTSP_Conversion_for_ONVIF', [String]$file='list.dat')
 
 # ファイルをダウンロードするためのWebClientオブジェクトを生成
@@ -16,15 +16,17 @@ foreach($url in Get-Content $file){
 
 # 解凍する
 
-Expand-Archive -Path $path CentOS-Userland-8-stream-aarch64-RaspberryPI-Minimal-4-sda.raw.xz -DestinationPath $path
-Expand-Archive -Path $path Win32DiskImager-1.0.0-binary.zip -DestinationPath $path
+Expand-Archive -Path "%USERPROFILE%\AppData\Local\Temp\RTSP_Conversion_for_ONVIF\7za920.zip" -DestinationPath "%USERPROFILE%\AppData\Local\Temp\RTSP_Conversion_for_ONVIF"
+Expand-Archive -Path "%USERPROFILE%\AppData\Local\Temp\RTSP_Conversion_for_ONVIF\Win32DiskImager-1.0.0-binary.zip" -DestinationPath "%USERPROFILE%\AppData\Local\Temp\RTSP_Conversion_for_ONVIF"
+
+start %USERPROFILE%\AppData\Local\Temp\RTSP_Conversion_for_ONVIF\7za.exe %USERPROFILE%\AppData\Local\Temp\RTSP_Conversion_for_ONVIF\CentOS-Userland-8-stream-aarch64-RaspberryPI-Minimal-4-sda.raw.xz e -o%USERPROFILE%\AppData\Local\Temp\RTSP_Conversion_for_ONVIF
 
 #FAT32
 
-$input = Read-Host "Drive_Letter input:" + :
+$input = Read-Host "Drive_Letter input"
 
 Format /FS:FAT32 $input
 
 #焼く
 
-start $path Win32DiskImager.exe -"CentOS-Userland-8-stream-aarch64-RaspberryPI-Minimal-4-sda.raw"
+start "%USERPROFILE%\AppData\Local\Temp\RTSP_Conversion_for_ONVIF\Win32DiskImager.exe" -"CentOS-Userland-8-stream-aarch64-RaspberryPI-Minimal-4-sda.raw"
